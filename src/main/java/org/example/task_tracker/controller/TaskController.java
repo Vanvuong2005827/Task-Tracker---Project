@@ -33,7 +33,7 @@ public class TaskController {
     })
     @GetMapping("/")
     public ResponseEntity<List<TaskResponse>> getTasks(Pageable pageable) {
-        return new ResponseEntity<>(taskService.getAll(),HttpStatus.OK);
+        return new ResponseEntity<>(taskService.getAll(pageable),HttpStatus.OK);
     }
 
     //--------------------------------getTaskById-----------------------------------------

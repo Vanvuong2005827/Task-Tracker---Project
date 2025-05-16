@@ -10,6 +10,7 @@ import org.example.task_tracker.repository.TaskRepository;
 import org.example.task_tracker.services.TaskService;
 import org.example.task_tracker.utils.PostPageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,8 @@ public class TaskServiceImpl implements TaskService {
 
 
     @Override
-    public List<TaskResponse> getAll(int page, int size, Sort sort) {
-        List<Task> tasks = taskRepository.findAll(PostPageRequest.of(page, size, sort)).getContent();
+    public List<TaskResponse> getAll(Pageable pageable) {
+        List<Task> tasks = taskRepository.findAll(pageable).getContent();
         if (tasks.isEmpty()) {
             throw new ResourceNotFoundException("No tasks found");
         }
